@@ -1,3 +1,10 @@
+
+export function getParam(param) {
+  const query = window.location.search;
+  const urlParams = new URLSearchParams(query);
+  return urlParams.get(param);
+}
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
