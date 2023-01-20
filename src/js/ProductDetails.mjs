@@ -12,7 +12,9 @@ export default class ProductDetails {
     async init() {
         let pData = new ProductData(this.category);
         const product = await pData.findProductById(this.id);
-        this.product = product;
+        product.Image = "https://emoryhubbard.github.io/emorysleepoutside/src" + product.Image.slice(2);
+        this.product = product; //netlify had trouble finding images
+
         this.renderProductDetails();
         qs("#addToCart").addEventListener("click", this.addToCart.bind(this));
     }
