@@ -28,6 +28,7 @@ export default class ProductDetails {
     }
     renderProductDetails() {
         let p = this.product;
+        console.log(p.Image);
         qs(".product-detail").innerHTML =
         `<h3 class="brand">${p.Brand.Name}</h3>
 
