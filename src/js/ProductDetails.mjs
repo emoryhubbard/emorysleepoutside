@@ -12,7 +12,7 @@ export default class ProductDetails {
     async init() {
         let pData = new ProductData(this.category);
         const product = await pData.findProductById(this.id);
-        product.Image = "https://emoryhubbard.github.io/emorysleepoutside/src" + product.Image.slice(2); //netlify had trouble finding images
+        product.Image = "https://emoryhubbard.github.io/emorysleepoutside/src/public" + product.Image.slice(2); //netlify had trouble finding images
         this.product = product;
 
         this.renderProductDetails();
