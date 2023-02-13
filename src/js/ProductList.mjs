@@ -5,6 +5,29 @@ export default class ProductList {
         this.listElement = listElement;
     }
     async init() {
-        const list = await this.dataSource.getData();
+        const products = await this.dataSource.getData();
+        this.renderList(products);
+    }
+    renderList(products) {
+        products.map(this.renderOneProduct.bind(this));
+    }
+    renderOneProduct(product) {
+        if (product.Id == "989CG" || product.Id == "880RT") // we didn't receive images for some products, and the reading said to only display 4 products anyway, so these are skipped
+            return;
+        this.listElement.innerHTML += this.productCardTemplate(product);
+    }
+    productCardTemplate(p) {
+        return `<li class="product-card">
+        <a href="product-pages/index.html?product=${p.Id}">
+        <img
+          src="${p.Image}"
+          alt="${p.NameWithoutBrand}"
+        />
+        <h3 class="card__brand">${p.Brand.Name}</h3>
+        <h2 class="card__name">
+          ${p.NameWithoutBrand}
+        </h2>
+        <p class="product-card__price">$${p.ListPrice}</p></a>
+      </li>`;
     }
 }
