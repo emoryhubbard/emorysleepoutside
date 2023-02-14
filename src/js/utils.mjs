@@ -1,4 +1,34 @@
 
+export function renderTemplate({element, template, callback,
+  position = "after", clear = false }={}) {
+  if (clear) {element.innerHTML = ""};  // empty element first if so directed
+  element.insertAdjacentHTML(`${position}begin`, template);
+}
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  return response.text();
+}
+
+export async function loadHeaderFooter() {
+  const header = await loadTemplate(`../templates/header.html`);
+  const footer = await loadTemplate(`../templates/footer.html`);
+ 
+  renderTemplate({element: qs("header"), template: header, clear: true});
+  renderTemplate({element: qs("footer"), template: footer, clear: true});
+}
+
+export function renderList({templateFunction, element, list,
+  position = "after", clear = false }={}) {
+  let templates = "";
+  for (const item of list) {
+    templates += templateFunction(item); // add all templates
+  }
+
+  if (clear) {element.innerHTML = ""};  // empty element first if so directed
+  element.insertAdjacentHTML(`${position}begin`, templates);
+}
+
 export function getParam(param) {
   const query = window.location.search;
   const urlParams = new URLSearchParams(query);

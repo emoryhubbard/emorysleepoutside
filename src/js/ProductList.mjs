@@ -1,3 +1,5 @@
+import { renderList } from './utils.mjs';
+
 export default class ProductList {
     constructor(category, dataSource, listElement) {
         this.category = category;
@@ -5,8 +7,16 @@ export default class ProductList {
         this.listElement = listElement;
     }
     async init() {
-        const products = await this.dataSource.getData();
-        this.renderList(products);
+        let products = await this.dataSource.getData();
+        products = products.filter(this.isValid); // we didn't receive images for some products, and the reading said to only display 4 products anyway, so these are skipped
+
+        renderList({templateFunction: this.productCardTemplate,
+            element: this.listElement, list: products});
+        //this.renderList(products);
+    }
+    isValid(product) {
+        if (product.Id != "989CG" && product.Id != "880RT")
+            return true;
     }
     renderList(products) {
         products.map(this.renderOneProduct.bind(this));
