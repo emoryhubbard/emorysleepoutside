@@ -119,6 +119,15 @@ button {
   max-width: 600px;
   margin: auto;
 }
+.icon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 3rem;
+}
+.icon-grid > p {
+  text-align: center;
+  font-weight: bold;
+}
 .products {
   padding: 0.5em;
 }

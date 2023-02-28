@@ -7,7 +7,7 @@ export default class ProductList {
         this.listElement = listElement;
     }
     async init() {
-        let products = await this.dataSource.getData();
+        let products = await this.dataSource.getData(this.category);
         products = products.filter(this.isValid); // we didn't receive images for some products, and the reading said to only display 4 products anyway, so these are skipped
 
         renderList({templateFunction: this.productCardTemplate,
@@ -28,9 +28,9 @@ export default class ProductList {
     }
     productCardTemplate(p) {
         return `<li class="product-card">
-        <a href="product-pages/index.html?product=${p.Id}">
+        <a href="/product-pages/index.html?product=${p.Id}">
         <img
-          src="${p.Image}"
+          src="${p.Images.PrimaryMedium}"
           alt="${p.NameWithoutBrand}"
         />
         <h3 class="card__brand">${p.Brand.Name}</h3>
