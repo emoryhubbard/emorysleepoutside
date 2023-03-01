@@ -58,3 +58,11 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+export function toggle(selector, className) {
+  qs(selector).classList.toggle(className);
+}
+
+export function setClicks(callback, ...selectors) {
+  for (const selector of selectors)
+    setClick(selector, callback);
+}

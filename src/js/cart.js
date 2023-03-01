@@ -1,23 +1,34 @@
-import { qs, getLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import { toggle, qs, getLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
   console.log(cartItems);
   if (cartItems != null) {
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    qs(".product-list").innerHTML = htmlItems.join("");
+    renderProducts(cartItems);
+    renderTotal(cartItems);
+    toggle(".cart-footer", "hide");
   }
   else {
     qs(".product-list").innerHTML = "Cart is currently empty.";
   }
 }
 
+function renderProducts(cartItems) {
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  qs(".product-list").innerHTML = htmlItems.join("");
+}
+
+function renderTotal(cartItems) {
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.FinalPrice, 0);
+  qs(".total").innerHTML = `$${total}`;
+}
+
 function cartItemTemplate(item) {
-  console.log(item.Image);
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
