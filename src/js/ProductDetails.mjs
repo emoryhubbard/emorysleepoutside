@@ -1,5 +1,5 @@
 import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs"
-import ProductData from "./ProductData.mjs"
+import ExternalServices from "./ExternalServices.mjs"
 
 export default class ProductDetails {
     constructor(id, category) {
@@ -10,7 +10,7 @@ export default class ProductDetails {
                                   //a promise if we don't wait
     //wait for findProductId to return a proper response
     async init() {
-        let pData = new ProductData(this.category);
+        let pData = new ExternalServices(this.category);
         const product = await pData.findProductById(this.id);
         console.log(product.Image);
       //product.Image = "https://emoryhubbard.github.io/emorysleepoutside/src/public" + product.Image.slice(2); //netlify had trouble finding images

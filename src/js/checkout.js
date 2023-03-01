@@ -1,21 +1,32 @@
 import { toggle, qs, getLocalStorage, loadHeaderFooter } from "./utils.mjs";
-import { renderSubtotal, renderShipping, renderTax, renderTotal } from "./CheckoutProcess.mjs";
+import CheckoutProcess from "./CheckoutProcess.mjs";
 
-function renderOrderSummary() {
+function renderOrderSummary(cp) {
     const cartItems = getLocalStorage("so-cart");
     console.log(cartItems);
     if (cartItems != null) {
-      renderSubtotal(cartItems);
-      renderShipping(cartItems);
-      renderTax(cartItems);
-      renderTotal(cartItems);
+      cp.renderSubtotal();
+      cp.renderShipping();
+      cp.renderTax();
+      cp.renderTotal();
     }
     else {
       qs(".total").innerHTML = "Cart is currently empty.";
     }
   }
 
+function addSubmitListener(cp) {
+  document.forms.order.addEventListener("submit", function(e) {
+    e.preventDefault();
+    cp.checkout();
+  });
+}
+
+
 console.log("debug", "checkout.js is running");
 
-renderOrderSummary();
+const cartItems = getLocalStorage("so-cart");
+const cp = new CheckoutProcess(cartItems);
+addSubmitListener(cp);
+renderOrderSummary(cp);
 loadHeaderFooter();
