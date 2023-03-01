@@ -8,7 +8,7 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <script src="../js/checkout.js" type="module"></script>
   </head>
 
@@ -19,6 +19,34 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form onsubmit="return false;">
+          <fieldset>
+              <legend>Shipping</legend>
+              <label>First name<span class="asterisk">*</span><input type="text" name="clientFirstname" title="Required field" required placeholder=""></label>
+              <label>Last name<span class="asterisk">*</span><input type="text" name="clientLastname" title="Required field" required placeholder=""></label>                    
+              <label>Street<span class="asterisk">*</span><input type="text" name="clientStreet" title="Required field" required placeholder=""></label>
+              <label>City<span class="asterisk">*</span><input type="text" name="clientCity" title="Required field" required placeholder=""></label>
+              <label>State<span class="asterisk">*</span><input type="text" name="clientState" title="Required field" required placeholder=""></label>
+              <label>Zip<span class="asterisk">*</span><input type="text" name="clientZip" title="Required field" required placeholder=""></label>  
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <label>Card number<span class="asterisk">*</span><input type="text" name="clientCardNumber" title="Required field" required placeholder=""></label>
+            <label>Expiration<span class="asterisk">*</span><input type="text" name="clientExpiration" title="Required field" required placeholder=""></label>                    
+            <label>Security Code<span class="asterisk">*</span><input type="text" name="clientSecurityCode" title="Required field" required placeholder=""></label>
+         </fieldset>
+        <fieldset class="order-summary">
+          <legend>Order Summary</legend>
+          <div class="order-summary-grid">
+            <p class="col1">Item Subtotal</p><p class="col2 subtotal">2</p>
+            <p class="col1">Shipping Estimate</p><p class="col2 shipping">2</p>
+            <p class="col1">Tax</p><p class="col2 tax">2</p>
+            <p class="col1">Order Total</p><p class="col2 total">2</p>
+          </div>
+      </fieldset>
+          <input class="submit-button" type="submit" value="Checkout">
+          <input type="hidden" name="action" value="submitCheckout">
+      </form>
       </section>
     </main>
 
