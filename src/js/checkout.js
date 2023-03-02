@@ -1,4 +1,4 @@
-import { toggle, qs, getLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import { alertMessage, qs, getLocalStorage, loadHeaderFooter } from "./utils.mjs";
 import CheckoutProcess from "./CheckoutProcess.mjs";
 
 function renderOrderSummary(cp) {

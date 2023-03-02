@@ -303,6 +303,27 @@ input:invalid:focus + span {
   color: red;
 }
 
+.success-section > * {
+  text-align: center;
+}
+.alert-message {
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+  padding: .8rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+.alert-message::after {
+  content: "×";
+  font-size: xx-large;
+  float: right;
+  line-height: 1.5rem;
+  pointer-events: all;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

@@ -1,4 +1,4 @@
-import { toggle, qs, getLocalStorage } from "./utils.mjs";
+import { qs, getLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs"
 
 function packageItem(item) {
@@ -59,8 +59,25 @@ export default class CheckoutProcess {
         payload.shipping = this.shipping(),
         payload.tax = this.tax().toFixed(2)
         console.log(payload);
-
-        this.externalServices.checkout(payload);
+        try {
+            await this.externalServices.checkout(payload);
+            this.orderSuccess();
+        } catch (err) {
+            console.log(err.message);
+            this.orderFailure(err);
+        }
+    }
+    orderSuccess() {
+        localStorage.removeItem("so-cart");
+        window.location.replace("/checkout/success.html");
+    }
+    orderFailure(err) {
+        if (err.name == "servicesError") {
+            for (const [key, value] of Object.entries(err.message))
+                alertMessage(value);
+        } else {  
+            alertMessage("Failed to place order. Please try again later.");
+        }
     }
 }
 

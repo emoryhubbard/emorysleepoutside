@@ -1,4 +1,16 @@
 
+export function alertMessage(message, scroll = true) {
+  const p = `<p class="alert-message">${message}</p>`;
+  
+  qs("main").insertAdjacentHTML("afterbegin", p);
+  setClick("main p:first-child", alertListener);
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function alertListener(e) {
+  e.target.classList.toggle("hide");
+}
+
 export function renderTemplate({element, template, callback,
   position = "after", clear = false }={}) {
   if (clear) {element.innerHTML = ""};  // empty element first if so directed

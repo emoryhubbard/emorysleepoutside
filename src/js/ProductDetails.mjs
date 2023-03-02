@@ -1,4 +1,4 @@
-import { qs, getLocalStorage, setLocalStorage } from "./utils.mjs"
+import { alertMessage, qs, getLocalStorage, setLocalStorage } from "./utils.mjs"
 import ExternalServices from "./ExternalServices.mjs"
 
 export default class ProductDetails {
@@ -27,6 +27,7 @@ export default class ProductDetails {
         }
         items.push(this.product);
         setLocalStorage("so-cart", items);
+        alertMessage("Product added to cart!")
     }
     renderProductDetails() {
         let p = this.product;
