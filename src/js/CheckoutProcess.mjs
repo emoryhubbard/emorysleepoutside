@@ -12,7 +12,13 @@ function packageItem(item) {
 function packageItems(items) {
     const cartItems = getLocalStorage("so-cart");
     return cartItems.map(packageItem);
-
+}
+function jsonifyForm(form) {
+    const formData = new FormData(form);
+    const json = {};
+    for (const [key, value] of formData)
+        json[key] = value;
+    return json;
 }
 export default class CheckoutProcess {
     constructor(cartItems) {
@@ -46,27 +52,12 @@ export default class CheckoutProcess {
         qs(".total").innerHTML = `$${this.total().toFixed(2)}`;
     }
     async checkout(form) {
-        const d = new Date();
-        const date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
-        const time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
-        const ms = `${d.getMilliseconds()}`;
-        const fullDate = date + "T" + time + "." + ms + "Z";
-        const payload = {
-            orderDate: fullDate,
-            fname: qs('input[name="firstName"]').value,
-            lname: qs('input[name="lastName"]').value,
-            street: qs('input[name="street"]').value,
-            city: qs('input[name="city"]').value,
-            state: qs('input[name="state"]').value,
-            zip: qs('input[name="zip"]').value,
-            cardNumber: qs('input[name="cardNumber"]').value,
-            expiration: qs('input[name="expiration"]').value,
-            code: qs('input[name="securityCode"]').value,
-            items: packageItems(),
-            orderTotal: this.total().toFixed(2),
-            shipping: this.shipping(),
-            tax: this.tax().toFixed(2)
-        }
+        const payload = jsonifyForm(form);
+        payload.orderDate = new Date().toISOString();
+        payload.items = packageItems(),
+        payload.orderTotal = this.total().toFixed(2),
+        payload.shipping = this.shipping(),
+        payload.tax = this.tax().toFixed(2)
         console.log(payload);
 
         this.externalServices.checkout(payload);

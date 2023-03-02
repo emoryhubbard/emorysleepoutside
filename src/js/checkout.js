@@ -18,10 +18,9 @@ function renderOrderSummary(cp) {
 function addSubmitListener(cp) {
   document.forms.order.addEventListener("submit", function(e) {
     e.preventDefault();
-    cp.checkout();
+    cp.checkout(document.forms.order);
   });
 }
-
 
 console.log("debug", "checkout.js is running");
 

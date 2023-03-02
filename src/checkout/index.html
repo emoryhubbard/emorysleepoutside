@@ -22,8 +22,8 @@
         <form name="order">
           <fieldset>
               <legend>Shipping</legend>
-              <label>First name<span class="asterisk">*</span><input type="text" name="firstName" title="Required field" required placeholder=""></label>
-              <label>Last name<span class="asterisk">*</span><input type="text" name="lastName" title="Required field" required placeholder=""></label>                    
+              <label>First name<span class="asterisk">*</span><input type="text" name="fname" title="Required field" required placeholder=""></label>
+              <label>Last name<span class="asterisk">*</span><input type="text" name="lname" title="Required field" required placeholder=""></label>                    
               <label>Street<span class="asterisk">*</span><input type="text" name="street" title="Required field" required placeholder=""></label>
               <label>City<span class="asterisk">*</span><input type="text" name="city" title="Required field" required placeholder=""></label>
               <label>State<span class="asterisk">*</span><input type="text" name="state" title="Required field" required placeholder=""></label>
@@ -33,7 +33,7 @@
             <legend>Payment</legend>
             <label>Card number<span class="asterisk">*</span><input type="text" name="cardNumber" title="Required field" required placeholder=""></label>
             <label>Expiration<span class="asterisk">*</span><input type="text" name="expiration" title="Required field" required placeholder=""></label>                    
-            <label>Security Code<span class="asterisk">*</span><input type="text" name="securityCode" title="Required field" required placeholder=""></label>
+            <label>Security Code<span class="asterisk">*</span><input type="text" name="code" title="Required field" required placeholder=""></label>
          </fieldset>
         <fieldset class="order-summary">
           <legend>Order Summary</legend>
@@ -45,7 +45,6 @@
           </div>
       </fieldset>
           <input class="submit-button" type="submit" value="Checkout">
-          <input type="hidden" name="action" value="submitCheckout">
       </form>
       </section>
     </main>
