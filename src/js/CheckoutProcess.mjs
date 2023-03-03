@@ -73,8 +73,8 @@ export default class CheckoutProcess {
     }
     orderFailure(err) {
         if (err.name == "servicesError") {
-            for (const [key, value] of Object.entries(err.message))
-                alertMessage(value);
+            for (const key in err.message)
+                alertMessage(err.message[key]);
         } else {  
             alertMessage("Failed to place order. Please try again later.");
         }
