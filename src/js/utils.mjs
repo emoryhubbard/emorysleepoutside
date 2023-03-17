@@ -1,3 +1,10 @@
+export function jsonifyForm(form) {
+  const formData = new FormData(form);
+  const json = {};
+  for (const [key, value] of formData)
+      json[key] = value;
+  return json;
+}
 
 export function alertMessage(message, scroll = true) {
   const p = `<p class="alert-message">${message}</p>`;

@@ -1,5 +1,7 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 const checkoutURL = import.meta.env.VITE_CHECKOUT_URL;
+const loginURL = import.meta.env.VITE_LOGIN_URL;
+const ordersURL = import.meta.env.VITE_ORDERS_URL;
 
 async function convertToJson(res) {
   if (res.ok) {
@@ -36,9 +38,35 @@ export default class ExternalServices {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
-  }
+    }
 
-  const response = await fetch(checkoutURL, options);
-  const resJson = await convertToJson(response);
+    const response = await fetch(checkoutURL, options);
+    const resJson = await convertToJson(response);
+  }
+  async loginRequest(credentials) {
+    const options = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    }
+    console.log("loginURL: ", loginURL);
+    const response = await fetch(loginURL, options);
+    const resJson = await convertToJson(response);
+    const token = resJson['accessToken'];
+    return token;
+  }
+  async getOrders(token) {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+
+    const response = await fetch(ordersURL, options);
+    const orders = await convertToJson(response);
+    return orders;
   }
 }
