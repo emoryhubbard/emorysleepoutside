@@ -6,6 +6,8 @@ export default class Admin {
         this.token = null;
         this.services = new ExternalServices();
     }
+    /*Use user1@email.com for email and user1 for password
+    for it to succeed*/
     async login(credentials, callback = null) {
         try {
             this.token = await this.services.loginRequest(credentials);
