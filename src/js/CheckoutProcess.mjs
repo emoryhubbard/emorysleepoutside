@@ -51,6 +51,11 @@ export default class CheckoutProcess {
     renderTotal() {
         qs(".total").innerHTML = `$${this.total().toFixed(2)}`;
     }
+
+    /*Use 1234123412341234 for the card number,
+    123 for the security code, and any expiration in the future
+    if you want your order to succeed.*/
+    
     async checkout(form) {
         const payload = jsonifyForm(form);
         payload.orderDate = new Date().toISOString();
